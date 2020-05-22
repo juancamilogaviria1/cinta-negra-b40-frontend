@@ -28,7 +28,7 @@ import {
               <NavLink tag={Link} to="/Login">Login</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/signup">Signup</NavLink>
+                <NavLink tag={Link} to="/Signup">Signup</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
