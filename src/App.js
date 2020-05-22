@@ -18,8 +18,8 @@ import {
 function App() {
   return (
     <React.Fragment>
-      <Navigation />
       <Router>
+       <Navigation />  
       <Switch>
           <Route path="/Login">
             <Login />
