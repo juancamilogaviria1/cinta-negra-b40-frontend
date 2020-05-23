@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import {
     Button,
      Form, 
@@ -15,18 +16,17 @@ import {
         const [password, setpassword] =  useState('');
 
         const handleInput = (e) => {
-            
             switch (e.target.name) {
                 case "inputFirstName":
                     setFirstName(e.target.value)
                     break;
-                case "inputLastName":
+                case "lastName":
                     setlastName(e.target.value)
                     break;
-                case "inputemail":
+                case "email":
                     setemail(e.target.value)
                     break;
-                case "inputpassword":
+                case "password":
                     setpassword(e.target.value)
                     break;
                 default:
@@ -34,8 +34,21 @@ import {
             }
         }
 
-        const handleSubmit = (e) =>{
+        const handleSubmit = async (e) =>{
             e.preventDefault();
+            const jsonSend = {
+                first_name: firstName,
+                last_name: lastName,
+                email,
+                password,
+            }
+                try {
+                    const res = await axios.post('https://bneuraldev.herokuapp.com/api/v1/users/signup', jsonSend);
+                    alert('¡Successful Signup!')
+                } catch (error) {
+                    alert('Erroron on signup')
+                }
+            
         }
 
        return (
@@ -46,8 +59,8 @@ import {
                                 <Label>First Name</Label>
                                 <Input 
                                 type="text"
-                                name="firstName" 
-                                id="inputFirstName" 
+                                id="firstName" 
+                                name="inputFirstName" 
                                 placeholder="type your first name"
                                 value={firstName}
                                 onChange={handleInput}  />
