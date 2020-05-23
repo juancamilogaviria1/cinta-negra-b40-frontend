@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
 import {
      Button,
@@ -9,7 +10,7 @@ import {
      } from 'reactstrap';
 
      const Login = (props) => {
-
+        const { setToken } = useContext(AuthContext);
         const [email, setEmail] =  useState('');
         const [password, setPassword] =  useState('');
 
@@ -18,12 +19,12 @@ import {
             const jsonSend = { email, password }
             try {
                 const res = await axios.post('https://bneuraldev.herokuapp.com/api/v1/users/login', jsonSend);
-                localStorage.setItem('token', res.data.token);
+                setToken(res.data.token)
                 alert('¡Successful Login!')
             } catch (error) {
                 alert('Error on Login')                
             }
-            
+
         }; 
 
         return (

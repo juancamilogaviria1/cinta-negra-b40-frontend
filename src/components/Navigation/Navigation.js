@@ -1,4 +1,5 @@
-import React, { useState} from 'react';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import {
     Collapse,
@@ -10,19 +11,20 @@ import {
     NavLink,
   } from 'reactstrap';
 
-  const Navigation = (props) => {
+  const Navigation = () => {
+    const { color, isAuth } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
-    const token = localStorage.getItem("token");
+    
   
     const toggle = () => setIsOpen(!isOpen);
   
     const renderNavigation = () =>{
-      return token 
+      return isAuth 
         ? (<Navbar 
             className="navbar navbar-dark bg-primary" 
             color="dark" 
             light expand="md">
-          <NavbarBrand tag={Link} to="/">Bneural</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">{ color }</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
