@@ -12,7 +12,7 @@ import {
   } from 'reactstrap';
 
   const Navigation = () => {
-    const { color, isAuth } = useContext(AuthContext);
+    const { isAuth } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     
   
@@ -24,7 +24,7 @@ import {
             className="navbar navbar-dark bg-primary" 
             color="dark" 
             light expand="md">
-          <NavbarBrand tag={Link} to="/">{ color }</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">Bneural</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
