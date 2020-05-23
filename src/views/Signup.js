@@ -43,7 +43,7 @@ import {
                 password,
             }
                 try {
-                    const res = await axios.post('https://bneuraldev.herokuapp.com/api/v1/users/signup', jsonSend);
+                    axios.post('https://bneuraldev.herokuapp.com/api/v1/users/signup', jsonSend);
                     alert('¡Successful Signup!')
                 } catch (error) {
                     alert('Erroron on signup')
