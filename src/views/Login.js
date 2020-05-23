@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
 import {
@@ -9,20 +10,22 @@ import {
       Input,
      } from 'reactstrap';
 
-     const Login = (props) => {
-        const { setToken } = useContext(AuthContext);
+     const Login = () => {
+        const { isAuth ,  setTokenAndLogin } = useContext(AuthContext);
         const [email, setEmail] =  useState('');
         const [password, setPassword] =  useState('');
+
+        if (isAuth) return ( <Redirect to="/" /> )
 
         const handleSubmit = async (e) =>{
             e.preventDefault();
             const jsonSend = { email, password }
             try {
                 const res = await axios.post('https://bneuraldev.herokuapp.com/api/v1/users/login', jsonSend);
-                setToken(res.data.token)
+                setTokenAndLogin(res.data.token)
                 alert('¡Successful Login!')
             } catch (error) {
-                alert('Error on Login')                
+                alert('Error')                
             }
 
         }; 
