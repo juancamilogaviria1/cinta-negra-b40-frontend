@@ -8,7 +8,7 @@ const Logout = () => {
     const { removeToken } = useContext(AuthContext);
         removeToken();
     alert('Succesful logout');
-    // history.push('/login');
+    history.push('/login');
     
 }
 

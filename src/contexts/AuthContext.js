@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import base64 from 'base-64'; 
 
 export const AuthContext = createContext();
 
@@ -16,7 +17,9 @@ const AuthContextProvider = (props) =>{
     }
 
     const getToken = () =>{
-        return localStorage.getItem('token');
+        const encodedToken = localStorage.getItem('token');
+        const decodedToken  = base64.decode(encodedToken);
+        return decodedToken;
     }
 
     return (

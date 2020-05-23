@@ -12,9 +12,10 @@ import {
   } from 'reactstrap';
 
   const Navigation = () => {
-    const { isAuth } = useContext(AuthContext);
+    const { isAuth, getToken } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
-    
+    const token = getToken();
+    console.log(token);
   
     const toggle = () => setIsOpen(!isOpen);
   
