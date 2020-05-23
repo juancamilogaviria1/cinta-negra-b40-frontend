@@ -5,6 +5,11 @@ import React, {Fragment} from 'react';
 
 //Componentes
 import Navigation from './components/Navigation';
+import Footer from './components/Footer/Footer';
+
+//contexts
+import AuthContextProvider from './contexts/AuthContext';
+
 
 //Misc
 import { Container } from 'reactstrap';
@@ -14,13 +19,16 @@ import Routes from './Routes';
 function App() {
   return (
     <Fragment>
-          <Router>
-          <Navigation />  
-          <Container className="mt-4">
-            <Switch>
-              { Routes }
-            </Switch>
-          </Container> 
+      <Router>
+        <AuthContextProvider>
+            <Navigation />  
+              <Container className="mt-4">
+                <Switch>
+                  { Routes }
+                </Switch>
+              </Container> 
+                <Footer />
+        </AuthContextProvider>
       </Router>
     </Fragment>
   );

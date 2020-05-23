@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import {
      Button,
       Form, 
@@ -7,18 +8,47 @@ import {
       Input,
      } from 'reactstrap';
 
-     const Login = () => {
+     const Login = (props) => {
+
+        const [email, setEmail] =  useState('');
+        const [password, setPassword] =  useState('');
+
+        const handleSubmit = async (e) =>{
+            e.preventDefault();
+            const jsonSend = { email, password }
+            try {
+                const res = await axios.post('https://bneuraldev.herokuapp.com/api/v1/users/login', jsonSend);
+                localStorage.setItem('token', res.data.token);
+                alert('¡Successful Login!')
+            } catch (error) {
+                alert('Error on Login')                
+            }
+            
+        }; 
+
         return (
           <React.Fragment>  
-                <h1>Login</h1>
-            <Form>
+                <h1 className="mb-4">Login</h1>
+            <Form onSubmit={handleSubmit}>
                     <FormGroup>
                     <Label>Email</Label>
-                    <Input type="email" name="email" id="exampleEmail" placeholder="type you email" />
+                    <Input 
+                    type="email" 
+                    name="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    id="exampleEmail" 
+                    placeholder="type your email" />
                     </FormGroup>
                     <FormGroup>
-                    <Label for="examplePassword">Password</Label>
-                    <Input type="password" name="password" id="examplePassword" placeholder="type your password here" />
+                    <Label>Password</Label>
+                    <Input 
+                    type="password" 
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    id="examplePassword" 
+                    placeholder="type your password here" />
                     </FormGroup>
                     <Button>Submit</Button>
             </Form>

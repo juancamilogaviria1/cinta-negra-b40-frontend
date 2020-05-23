@@ -46,7 +46,7 @@ import {
                     axios.post('https://bneuraldev.herokuapp.com/api/v1/users/signup', jsonSend);
                     alert('¡Successful Signup!')
                 } catch (error) {
-                    alert('Erroron on signup')
+                    alert('Error on signup')
                 }
             
         }
