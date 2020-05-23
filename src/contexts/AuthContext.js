@@ -1,31 +1,38 @@
-import React, { createContext, useState } from 'react';
-import base64 from 'base-64'; 
+import React, { createContext, useState, useEffect } from 'react';
+import  { useHistory } from 'react-router-dom';
+
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) =>{
+    const  history = useHistory();
     const [isAuth, setAuth ] = useState(false);
 
-    const setToken = (token) =>{
-        localStorage.setItem('token', token);
-        setAuth(true);
+    const getToken = () =>{
+        return localStorage.getItem('token');
     }
 
-    const removeToken = () => {
+    useEffect(() => {
+        if ((getToken)) setAuth(true);
+    }, [])
+
+    const setTokenAndLogin = (token) =>{
+        localStorage.setItem('token', token);
+        setAuth(true);
+        return history.push('/');
+    }
+
+    const removeTokenAndLogout = () => {
         localStorage.removeItem('token');
         setAuth(false);
     }
 
-    const getToken = () =>{
-        const encodedToken = localStorage.getItem('token');
-        const decodedToken  = base64.decode(encodedToken);
-        return decodedToken;
-    }
 
     return (
         <AuthContext.Provider value={{ 
-             isAuth, getToken, setToken, removeToken }}>
-            { props.children }
+             isAuth, getToken, setTokenAndLogin, removeTokenAndLogout
+              }}>
+                { props.children }
         </AuthContext.Provider>
     )
 }
