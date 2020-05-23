@@ -27,7 +27,7 @@ function App() {
                   { Routes }
                 </Switch>
               </Container> 
-                <Footer />
+              <Footer />
         </AuthContextProvider>
       </Router>
     </Fragment>
